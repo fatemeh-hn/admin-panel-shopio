@@ -1,5 +1,10 @@
 @import "tailwindcss";
 
-:root{
-  --app--primary : ;
+:root {
+  /* login */
+  --app--primary: #FEAF00;
+  --app--text-primary: #000000;
+  --app--text-secondary: #6C6C6C;
+  --app--border: #CDCDCD;
+
 }
