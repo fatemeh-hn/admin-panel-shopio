@@ -5,8 +5,9 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
+import profileImage from "../../assets/boss-kid.png";
 import { LogOut, ShoppingCart, UserPen } from "lucide-react";
-
+import { Link, useLocation } from "react-router";
 
 const menuItems = [
   { title: "Products", icon: ShoppingCart },
@@ -14,6 +15,7 @@ const menuItems = [
 ];
 
 export default function Sidebar() {
+  const location = useLocation();
   return (
     <Drawer
       variant="permanent"
@@ -37,11 +39,11 @@ export default function Sidebar() {
 
         <Box className="mb-8 text-center">
           <img
-            src="/avatar.png"
+            src={profileImage}
             alt="Profile"
             className="mx-auto mb-3 h-24 w-24 rounded-full object-cover"
           />
-          <p className="font-semibold">Karthi Madesh</p>
+          <p className="font-semibold">Fatemeh</p>
           <p className="mt-1 text-sm text-primary">Admin</p>
         </Box>
 
@@ -49,9 +51,17 @@ export default function Sidebar() {
           {menuItems.map(({ title, icon: Icon }) => (
             <ListItem key={title} disablePadding className="mb-2">
               <ListItemButton
-                selected={title === "Students"}
+                component={Link}
+                to={title === "Products" ? "/products" : "/profile"}
+                selected={
+                  (title === "Products" && location.pathname === "/products") ||
+                  (title === "Profile" && location.pathname === "/profile")
+                }
                 sx={{
                   borderRadius: "4px",
+                  "&:hover": {
+                    backgroundColor: "#FFAE00",
+                  },
                   "&.Mui-selected": {
                     backgroundColor: "#FFAE00",
                   },
@@ -78,7 +88,14 @@ export default function Sidebar() {
 
         <List>
           <ListItem disablePadding>
-            <ListItemButton>
+            <ListItemButton
+              sx={{
+                borderRadius: "4px",
+                "&:hover": {
+                  backgroundColor: "#FFAE00",
+                },
+              }}
+            >
               <ListItemIcon sx={{ minWidth: 32 }}>
                 <LogOut size={17} />
               </ListItemIcon>
