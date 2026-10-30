@@ -1,6 +1,5 @@
 import Box from "@mui/material/Box";
-import Sidebar from "../../../shared/layout/Sidebar";
-import ProductsDashboard from "../components/ProductsItems";
+import ProductsDashboard from "../components/Products";
 
 export default function Dashboard() {
   return (
@@ -20,7 +19,7 @@ export default function Dashboard() {
 
         <ProductsDashboard/>
 
-        {/* جدول دانشجویان */}
+       
       </Box>
     </Box>
   );

@@ -6,6 +6,7 @@ export interface Product {
     discountPrice: number,
     stockQuantity: number,
     inStock: boolean,
+    slug:string,
     categoryId: number,
     categoryName: string,
     brand: string,
