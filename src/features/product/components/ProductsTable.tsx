@@ -16,7 +16,13 @@ export default function ProductsTable({ products }: Props) {
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }}>
-        <TableHead>
+        <TableHead
+          sx={{
+            "& .MuiTableCell-root": {
+              color: "var(--app-text-secondary)",
+            },
+          }}
+        >
           <TableRow>
             <TableCell align="center">Image</TableCell>
             <TableCell align="center">Product Name</TableCell>
@@ -40,17 +46,12 @@ export default function ProductsTable({ products }: Props) {
               </TableCell>
 
               <TableCell align="center">{product.name}</TableCell>
-
               <TableCell align="center">{product.brand}</TableCell>
-
               <TableCell align="center">{product.categoryName}</TableCell>
-
               <TableCell align="center">
                 {product.price.toLocaleString()} تومان
               </TableCell>
-
               <TableCell align="center">{product.slug}</TableCell>
-
               <TableCell align="center">{product.stockQuantity}</TableCell>
             </TableRow>
           ))}

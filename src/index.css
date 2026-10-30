@@ -5,8 +5,12 @@
   --app-text-primary: #000000;
   --app-text-secondary: #6C6C6C;
   --app-border: #CDCDCD;
+  --app-drawer:#F2EAE1;
 
 }
 @theme inline{
     --color-primary:var(--app-primary);
+    --color-text-primary:var(--app-text-primary);
+    --color-text-secondary:var(--app-text-secondary);
+    
 }

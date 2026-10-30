@@ -23,14 +23,19 @@ export default function Sidebar() {
       sx={{
         width: 210,
         flexShrink: 0,
+
         "& .MuiDrawer-paper": {
           width: 210,
           boxSizing: "border-box",
-          backgroundColor: "#F4ECE3",
+          backgroundColor: "var(--app-drawer)",
           border: "none",
           padding: "16px",
-          position: "static",
+
+          position: "fixed",
+          top: 0,
+          left: 0,
           height: "100vh",
+          overflowY: "auto",
         },
       }}
     >
@@ -60,13 +65,13 @@ export default function Sidebar() {
                 sx={{
                   borderRadius: "4px",
                   "&:hover": {
-                    backgroundColor: "#FFAE00",
+                    backgroundColor: "var(--app-primary)",
                   },
                   "&.Mui-selected": {
-                    backgroundColor: "#FFAE00",
+                    backgroundColor: "var(--app-primary)",
                   },
                   "&.Mui-selected:hover": {
-                    backgroundColor: "#F5A500",
+                    backgroundColor: "var(--app-primary)",
                   },
                 }}
               >
@@ -92,7 +97,7 @@ export default function Sidebar() {
               sx={{
                 borderRadius: "4px",
                 "&:hover": {
-                  backgroundColor: "#FFAE00",
+                  backgroundColor: "var(--app-primary)",
                 },
               }}
             >
