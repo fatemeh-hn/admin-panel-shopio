@@ -42,7 +42,7 @@ export default function Sidebar() {
             className="mx-auto mb-3 h-24 w-24 rounded-full object-cover"
           />
           <p className="font-semibold">Karthi Madesh</p>
-          <p className="mt-1 text-sm text-amber-500">Admin</p>
+          <p className="mt-1 text-sm text-primary">Admin</p>
         </Box>
 
         <List className="flex-1">
