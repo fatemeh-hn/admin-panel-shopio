@@ -1,45 +1,40 @@
-import { useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 import { getProducts } from "../api/product";
 import type { Product } from "../types/product";
 
+interface ProductsResponse {
+  items: Product[];
+}
+
 export default function ProductsDashboard() {
-  const [products, setProducts] = useState<Product[]>([]);
-  const [loading, setLoading] = useState(true);
+  const {
+    data,
+    isLoading,
+    isError,
+    error,
+  } = useQuery<ProductsResponse>({
+    queryKey: ["products"],
+    queryFn: getProducts,
+  });
 
-  useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const res = await getProducts();
+  if (isLoading) return <p>Loading to get Products...</p>;
 
-        console.log("API DATA:", res.data);
-
-        setProducts(res.data.items);
-      } catch (error) {
-        console.error("API ERROR:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchProducts();
-  }, []);
-
-  if (loading) return <p>Loading...</p>;
+  if (isError) return <p>{error.message}</p>;
 
   return (
     <div>
-      <h1 className="text-2xl font-bold mb-3">Products List</h1>
+      <h1 className="text-2xl font-bold">Products List</h1>
 
-      {products.map((product) => (
+      {data?.items.map((product) => (
         <div key={product.id} className="border p-4 my-2">
-          <img src={`http://localhost:5080${product.imageUrl}`} alt={product.name} />
-          <p>{product.shortDescription}</p>
-          <p>{product.brand}</p>
-          <p className="text-green-400">{product.price}</p>
-          <p className="text-red-400">{product.discountPrice}</p>
-          <p>{product.categoryName}</p>
+          <img
+            src={`http://localhost:5080${product.imageUrl}`}
+            alt={product.name}
+            className="w-32 h-32 object-cover"
+          />
 
-          
+          <p>{product.name}</p>
+          <p>{product.price}</p>
         </div>
       ))}
     </div>
