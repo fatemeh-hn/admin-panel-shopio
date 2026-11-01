@@ -9,9 +9,21 @@ export default function ProductsDashboard() {
 
   const pageSize = 5;
 
+  const [sortBy, setSortBy] = useState("");
+
+  const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
+
+  const handleSort = (field: string) => {
+    setSortBy(field);
+
+    setSortOrder((currentOrder) => (currentOrder === "asc" ? "desc" : "asc"));
+
+    setPage(1);
+  };
+
   const { data, isLoading, isError, error } = useQuery({
-    queryKey: ["products", page, pageSize],
-    queryFn: () => getProducts(page, pageSize),
+    queryKey: ["products", page, pageSize, sortBy, sortOrder],
+    queryFn: () => getProducts(page, pageSize, sortBy, sortOrder),
   });
 
   if (isLoading) {
@@ -26,7 +38,7 @@ export default function ProductsDashboard() {
     <div>
       <h1 className="mb-6 text-2xl font-bold">Products List</h1>
 
-      <ProductsTable products={data?.items ?? []} />
+      <ProductsTable products={data?.items ?? []} onSort={handleSort} />
 
       <div className="mt-6 flex justify-center">
         <Pagination
