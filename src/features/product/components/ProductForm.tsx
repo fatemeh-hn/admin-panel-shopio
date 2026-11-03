@@ -1,5 +1,4 @@
 import { useState } from "react";
-
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
@@ -23,9 +22,10 @@ export interface ProductFormValues {
 
 interface Props {
   onSubmit: (data: ProductFormValues) => void;
+  isPending: boolean;
 }
 
-export default function ProductForm({ onSubmit }: Readonly<Props>) {
+export default function ProductForm({ onSubmit , isPending}: Readonly<Props>) {
   const [formData, setFormData] = useState<ProductFormValues>({
     name: "",
     slug: "",
@@ -337,6 +337,7 @@ export default function ProductForm({ onSubmit }: Readonly<Props>) {
         <Button
           type="submit"
           variant="contained"
+          disabled={isPending}
           sx={{
             backgroundColor: "var(--app-primary)",
             color: "var(--app-drawer)",
@@ -347,7 +348,7 @@ export default function ProductForm({ onSubmit }: Readonly<Props>) {
             textTransform: "none",
           }}
         >
-          Create Product
+          {isPending ? "Creating..." : "Create Product"}
         </Button>
       </Box>
     </Box>
