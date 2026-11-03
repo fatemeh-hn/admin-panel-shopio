@@ -1,7 +1,9 @@
 import Box from "@mui/material/Box";
 import ProductsDashboard from "../components/Products";
 
+
 export default function Dashboard() {
+  
   return (
     <Box sx={{ display: "flex", minHeight: "100vh" }}>
       
