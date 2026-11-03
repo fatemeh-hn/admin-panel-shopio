@@ -14,16 +14,19 @@ export default function ProductsDashboard() {
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
 
   const handleSort = (field: string) => {
-    setSortBy(field);
-
-    setSortOrder((currentOrder) => (currentOrder === "asc" ? "desc" : "asc"));
+    if (sortBy === field) {
+      setSortOrder((current) => (current === "asc" ? "desc" : "asc"));
+    } else {
+      setSortBy(field);
+      setSortOrder("asc");
+    }
 
     setPage(1);
   };
 
   const { data, isLoading, isError, error } = useQuery({
     queryKey: ["products", page, pageSize, sortBy, sortOrder],
-    queryFn: () => getProducts(page, pageSize, sortBy, sortOrder),
+    queryFn: () => getProducts({ page, pageSize, sortBy, sortOrder }),
   });
 
   if (isLoading) {
@@ -38,7 +41,12 @@ export default function ProductsDashboard() {
     <div>
       <h1 className="mb-6 text-2xl font-bold">Products List</h1>
 
-      <ProductsTable products={data?.items ?? []} onSort={handleSort} />
+      <ProductsTable
+        products={data?.items ?? []}
+        onSort={handleSort}
+        sortBy={sortBy}
+        sortOrder={sortOrder}
+      />
 
       <div className="mt-6 flex justify-center">
         <Pagination

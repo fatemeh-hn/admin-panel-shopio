@@ -1,11 +1,13 @@
 import { productAxios } from "../../../app/api/interceptor";
 
-export const getProducts = async (
-  page: number,
-  pageSize: number,
-  sortBy?: string,
-  sortOrder?: "asc" | "desc"
-) => {
+interface Prop{
+  page:number,
+  pageSize:number,
+  sortBy?:string,
+  sortOrder?:"asc" | "desc"
+}
+
+export const getProducts = async ({page, pageSize, sortBy, sortOrder}:Prop) => {
   const response = await productAxios.get("/products", {
     params: {
       page,

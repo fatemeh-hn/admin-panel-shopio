@@ -11,5 +11,6 @@ export interface Product {
     categoryName: string,
     brand: string,
     imageUrl: string,
+    createdAt:string
 
 }
