@@ -3,8 +3,12 @@ import { useQuery } from "@tanstack/react-query";
 import { getProducts } from "../api/product";
 import ProductsTable from "../components/ProductsTable";
 import Pagination from "@mui/material/Pagination";
+import { useNavigate } from "react-router";
+import Button from "@mui/material/Button";
 
 export default function ProductsDashboard() {
+  const navigate = useNavigate();
+
   const [page, setPage] = useState(1);
 
   const pageSize = 5;
@@ -39,7 +43,25 @@ export default function ProductsDashboard() {
 
   return (
     <div>
-      <h1 className="mb-6 text-2xl font-bold">Products List</h1>
+      <div className="mb-6 flex items-center justify-between">
+        <h1 className="text-2xl font-bold">Products List</h1>
+
+        <Button
+          variant="contained"
+          onClick={() => navigate("/products/create")}
+          sx={{
+            backgroundColor: "var(--app-primary)",
+            color: "var(--app-drawer)",
+            "&:hover": {
+              backgroundColor: "var(--app-primary)",
+              opacity: 0.85,
+            },
+            textTransform: "none",
+          }}
+        >
+          Create New Product
+        </Button>
+      </div>
 
       <ProductsTable
         products={data?.items ?? []}
